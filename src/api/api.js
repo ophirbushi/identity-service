@@ -1,14 +1,9 @@
 const status = require('http-status');
+const { create } = require('../db/db');
 
-module.exports = (app) => {
-    app.get('/authenticate/:domain', (req, res, next) => {
-        Promise.resolve()
-            .then(() => {
-                res.status(status.OK).json({
-                    message: 'received a request',
-                    params: req.params
-                });
-            })
-            .catch(next);
+module.exports = (app, tools) => {
+    app.get('/authenticate', (req, res, next) => {
+        const db = create();
+        res.send(db);
     });
 };
