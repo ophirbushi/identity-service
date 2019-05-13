@@ -1,10 +1,12 @@
-const levelup = require('levelup');
-const leveldown = require('leveldown');
+const mongoose = require('mongoose');
 
-const create = () => levelup(leveldown('./mydb'));
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String
+});
 
-module.exports = { create };
+const User = mongoose.model('User', userSchema);
 
-// db.put('test', '123')
-//     .then(console.log)
-//     .catch(console.error);
+module.exports = {
+    User
+};

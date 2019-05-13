@@ -13,4 +13,4 @@ process.on('uncaughtRejection', (err) => {
     console.error('Unhandled Rejection', err);
 });
 
-server.start({ port: 8080 });
+server.start();

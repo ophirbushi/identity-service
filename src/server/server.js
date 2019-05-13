@@ -1,12 +1,18 @@
 const express = require('express');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const config = require('../config/config');
 const api = require('../api/api');
 
-const start = (options) => {
+const start = () => {
+    mongoose.connect(config.DB_URI, { useNewUrlParser: true });
+
     const app = express();
     app.use(helmet());
-    api(app, options);
-    return app.listen(options.port);
+    app.use(bodyParser.json());
+    api(app);
+    return app.listen(config.port);
 };
 
 module.exports = { start };
