@@ -35,9 +35,6 @@
         ],
         "no-unused-vars": [
             "off"
-        ],
-        "eol-last": [
-            "error"
         ]
     }
 }
