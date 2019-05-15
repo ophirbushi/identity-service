@@ -1,4 +1,5 @@
 const { User } = require('../db/db');
+const { sign } = require('../jwt/jwt');
 
 module.exports = async (req, res) => {
     const { username, password } = req.body;
@@ -8,8 +9,10 @@ module.exports = async (req, res) => {
     try {
         const user = await User.findOne({ username, password });
         if (!user) return res.sendStatus(401);
-        return res.send(user);
+        const token = sign({ username });
+        return res.send(token);
     } catch (err) {
         return res.sendStatus(500);
     }
 };
+
