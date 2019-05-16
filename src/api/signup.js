@@ -1,5 +1,6 @@
 const { User } = require('../db/db');
 const { sign } = require('../jwt/jwt');
+const { generateSalt, hashPassword } = require('../cryptography/cryptography');
 
 module.exports = async (req, res) => {
     const { username, password } = req.body;
@@ -9,7 +10,11 @@ module.exports = async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (user) return res.status(409).send('user already exists');
-        await User.create({ username, password });
+
+        const salt = generateSalt();
+        const hash = hashPassword(password, salt);
+        await User.create({ username, salt, hash });
+
         const token = sign({ username });
         return res.send(token);
     } catch (err) {
