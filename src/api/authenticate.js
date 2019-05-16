@@ -1,4 +1,4 @@
-const { JsonWebTokenError } = require('jsonwebtoken');
+const { JsonWebTokenError, TokenExpiredError } = require('jsonwebtoken');
 const { verify } = require('../jwt/jwt');
 
 module.exports = async (req, res) => {
@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
         verify(token);
         res.sendStatus(200);
     } catch (err) {
+        if (err instanceof TokenExpiredError) return res.sendStatus(440);
         if (err instanceof JsonWebTokenError) return res.sendStatus(401);
         return res.sendStatus(500);
     }
