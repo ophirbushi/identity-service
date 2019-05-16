@@ -8,8 +8,6 @@ module.exports = async (req, res) => {
 
     try {
         verify(token);
-
-        
         res.sendStatus(200);
     } catch (err) {
         if (err instanceof JsonWebTokenError) return res.sendStatus(401);

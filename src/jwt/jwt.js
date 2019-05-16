@@ -1,7 +1,7 @@
-const { jwtSecret } = require('../config/config');
+const { jwtSecret, jwtExpiresIn } = require('../config/config');
 const jwt = require('jsonwebtoken');
 
-const sign = ({ username }) => jwt.sign({}, jwtSecret, { subject: username });
+const sign = ({ username }) => jwt.sign({}, jwtSecret, { subject: username, expiresIn: jwtExpiresIn });
 
 const verify = token => jwt.verify(token, jwtSecret);
 
