@@ -1,0 +1,15 @@
+version: '3'
+services:
+  identity-service:
+    build: .
+    depends_on: 
+      - db
+    environment:
+      - DB_URI=mongodb://db/identity-service
+    ports: 
+      - "8080:8080"
+
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
