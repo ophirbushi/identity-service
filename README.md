@@ -9,23 +9,23 @@
 ### Log In
 
 - receive username + password
-- send cookie
+- send token
 
-url: /login
+url: /api/v1/login
 method: POST
 
-### Log Out
+### Sign In
 
-- receive cookie
-- send ok
+- receive username + password
+- send token
 
-url: /logout
-method: DELETE
+url: /api/v1/signin
+method: POST
 
 ### Authenticate
 
-- receive cookie
-- send ok, or not ok
+- receive token
+- send ok
 
-url: /authenticate
-method: GET
+url: /api/v1/authenticate
+method: POST
